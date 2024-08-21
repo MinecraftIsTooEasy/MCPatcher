@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "mcpatcher",
+  "version": "5.0.3",
+  "name": "MCPatcher",
+  "description": "",
+  "authors": [
+    "Xy_Lose"
+  ],
+  "contributors": [],
+  "contact": {},
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "moddedmite.mcpatcher.MCPatcher"
+    ]
+  },
+  "custom": {
+    "loom:injected_interfaces": {
+    },
+  "mixins": [
+    "mcpatcher.mixins.json"
+  ],
+  "accessWidener": "mcpatcher.accesswidener",
+    "depends": {
+      "mite": "~1.6.4",
+      "fishmodloader": ">=3.0.0"
+    }
+  }
+}

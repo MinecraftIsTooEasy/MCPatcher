@@ -1,0 +1,30 @@
+accessWidener v2 named
+accessible field net/minecraft/TextureMap basePath Ljava/lang/String;
+accessible field net/minecraft/RenderBlocks colorRedTopLeft F
+accessible field net/minecraft/RenderBlocks colorGreenTopLeft F
+accessible field net/minecraft/RenderBlocks colorBlueTopLeft F
+accessible field net/minecraft/RenderBlocks colorRedBottomLeft F
+accessible field net/minecraft/RenderBlocks colorGreenBottomLeft F
+accessible field net/minecraft/RenderBlocks colorBlueBottomLeft F
+accessible field net/minecraft/RenderBlocks colorRedBottomRight F
+accessible field net/minecraft/RenderBlocks colorGreenBottomRight F
+accessible field net/minecraft/RenderBlocks colorBlueBottomRight F
+accessible field net/minecraft/RenderBlocks colorRedTopRight F
+accessible field net/minecraft/RenderBlocks colorGreenTopRight F
+accessible field net/minecraft/RenderBlocks colorBlueTopRight F
+accessible field net/minecraft/Potion liquidColor I
+accessible field net/minecraft/PotionHelper field_77925_n Ljava/util/HashMap;
+accessible field net/minecraft/EntityRenderer torchFlickerX F
+accessible field net/minecraft/EntityRenderer mc Lnet/minecraft/Minecraft;
+accessible method net/minecraft/EntityRenderer getNightVisionBrightness (Lnet/minecraft/EntityPlayer;F)F
+accessible field net/minecraft/TextureClock field_94239_h D
+accessible method net/minecraft/FileResourcePack getResourcePackZipFile ()Ljava/util/zip/ZipFile;
+accessible field net/minecraft/Minecraft renderEngine Lnet/minecraft/TextureManager;
+
+extendable class net/minecraft/EntityRenderer
+extendable class net/minecraft/ResourceLocation
+accessible method net/minecraft/FontRenderer readFontTexture ()V
+accessible field net/minecraft/TextureManager mapTextureObjects Ljava/util/Map;
+accessible field net/minecraft/AbstractResourcePack resourcePackFile Ljava/io/File;
+
+
