@@ -60,13 +60,14 @@ public abstract class MixinEffectRenderer {
         return 5;
     }
 
-    @Inject(
-            method = "renderParticles(Lnet/minecraft/Entity;F)V",
-            at = @At(value = "INVOKE", target = "Ljava/util/List;isEmpty()Z")
-    )
-    private void modifyRenderParticles2(Entity par1Entity, float par2, CallbackInfo ci, @Local int i, @Local(ordinal = 0) @Share("renderParticlesIndex") LocalIntRef renderParticlesIndex) {
-        renderParticlesIndex.set(i);
-    }
+    //TODO
+//    @Inject(
+//            method = "renderParticles(Lnet/minecraft/Entity;F)V",
+//            at = @At(value = "INVOKE", target = "Ljava/util/List;isEmpty()Z")
+//    )
+//    private void modifyRenderParticles2(Entity par1Entity, float par2, CallbackInfo ci, @Local int i, @Local(ordinal = 0) @Share("renderParticlesIndex") LocalIntRef renderParticlesIndex) {
+//        renderParticlesIndex.set(i);
+//    }
 
     @Redirect(
         method = "renderParticles(Lnet/minecraft/Entity;F)V",

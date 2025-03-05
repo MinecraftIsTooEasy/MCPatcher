@@ -80,16 +80,17 @@ public abstract class MixinWorldRenderer {
 
     // Dangerous territory with this amount of locals
     // Idea doesn't like it, but it does work :shrugs:
-    @SuppressWarnings({ "InvalidInjectorMethodSignature", "rawtypes" })
-    @Inject(
-        method = "updateRenderer",
-        at = @At(value = "JUMP", ordinal = 4, shift = At.Shift.AFTER),
-        locals = LocalCapture.CAPTURE_FAILHARD)
-    private void injectRenderPassStartUpdateRenderer(EntityLivingBase entity, CallbackInfo ci, int i, int j, int k,
-        int l, int i1, int j1, HashSet hashset, Minecraft minecraft, EntityLivingBase entity1, int l1, int i2, int j2,
-        byte b0, ChunkCache chunkcache, RenderBlocks renderblocks, int k2) {
-        RenderPass.start(k2);
-    }
+    //TODO
+//    @SuppressWarnings({ "InvalidInjectorMethodSignature", "rawtypes" })
+//    @Inject(
+//        method = "updateRenderer",
+//        at = @At(value = "JUMP", ordinal = 4, shift = At.Shift.AFTER),
+//        locals = LocalCapture.CAPTURE_FAILHARD)
+//    private void injectRenderPassStartUpdateRenderer(EntityLivingBase entity, CallbackInfo ci, int i, int j, int k,
+//        int l, int i1, int j1, HashSet hashset, Minecraft minecraft, EntityLivingBase entity1, int l1, int i2, int j2,
+//        byte b0, ChunkCache chunkcache, RenderBlocks renderblocks, int k2) {
+//        RenderPass.start(k2);
+//    }
 
     @Redirect(
         method = "updateRenderer",

@@ -26,9 +26,9 @@ repositories {
 loom {
 	accessWidenerPath = file("src/main/resources/mcpatcher.accesswidener")
 	mergedMinecraftJar()
-	setFML(new File("F:\\Projects\\IDEA\\Minecraft\\MITE\\FML3\\FishModLoader-v3.3.2.jar"))
+	setFML(new File("libs\\FishModLoader-v3.4.1.jar"))
 	mods {
-		"MITE-Creation" {
+		"MITEPatcher" {
 			sourceSet sourceSets.main
 		}
 	}
@@ -48,7 +48,8 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 //	implementation("org.spongepowered:mixin:0.8.5")
 
-	implementation files("libs\\fastutil-8.5.12.jar")
+	implementation files("libs\\Forge Config-0.0.1.jar")
+	implementation files("libs\\ManyLib-2.2.2.jar")
 	implementation files(loom.getFML().toPath())
 }
 

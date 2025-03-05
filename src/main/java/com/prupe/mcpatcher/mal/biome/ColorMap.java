@@ -1,13 +1,12 @@
-// +++START EDIT+++
 package com.prupe.mcpatcher.mal.biome;
 
-import com.prupe.mcpatcher.Config;
 import com.prupe.mcpatcher.MCLogger;
 import com.prupe.mcpatcher.MCPatcherUtils;
 import com.prupe.mcpatcher.mal.resource.PropertiesFile;
 import com.prupe.mcpatcher.mal.resource.ResourceList;
 import com.prupe.mcpatcher.mal.resource.TexturePackAPI;
 import com.prupe.mcpatcher.mal.util.WeightedIndex;
+import jss.notfine.config.MCPatcherForgeConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.BiomeGenBase;
@@ -19,9 +18,9 @@ import java.util.*;
 
 @Environment(EnvType.CLIENT)
 abstract public class ColorMap implements IColorMap {
-    private static final MCLogger logger = MCLogger.getLogger(MCPatcherUtils.CUSTOM_COLORS);
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.CUSTOM_COLORS);
 
-    public static final boolean useSwampColors = Config.getBoolean(MCPatcherUtils.CUSTOM_COLORS, "swamp", true);
+    public static final boolean useSwampColors = MCPatcherForgeConfig.instance().swampColors;
 
     private static final int FIXED = 0;
     private static final int TEMPERATURE_HUMIDITY = 1;
@@ -157,7 +156,7 @@ abstract public class ColorMap implements IColorMap {
         unusedPNGs.clear();
         defaultColorMapFormat = TEMPERATURE_HUMIDITY;
         defaultFlipY = false;
-        defaultYVariance = Config.getInt(MCPatcherUtils.CUSTOM_COLORS, "yVariance", 0);
+        defaultYVariance = MCPatcherForgeConfig.instance().yVariance;
     }
 
     public static void reloadColorMapSettings(PropertiesFile properties) {

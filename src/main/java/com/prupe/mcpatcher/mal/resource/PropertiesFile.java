@@ -13,7 +13,7 @@ import java.util.logging.Level;
 
 @Environment(EnvType.CLIENT)
 final public class PropertiesFile {
-    private static final MCLogger staticLogger = MCLogger.getLogger("Texture Pack");
+    private static final MCLogger staticLogger = MCLogger.getLogger(MCLogger.Category.TEXTURE_PACK);
 
     private final MCLogger logger;
     private final ResourceLocation resource;

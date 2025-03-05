@@ -1,7 +1,5 @@
-// +++START EDIT+++
 package com.prupe.mcpatcher.ctm;
 
-import com.prupe.mcpatcher.Config;
 import com.prupe.mcpatcher.MCLogger;
 import com.prupe.mcpatcher.MCPatcherUtils;
 import com.prupe.mcpatcher.mal.block.BlockAPI;
@@ -13,6 +11,7 @@ import com.prupe.mcpatcher.mal.resource.ResourceList;
 import com.prupe.mcpatcher.mal.resource.TexturePackAPI;
 import com.prupe.mcpatcher.mal.resource.TexturePackChangeHandler;
 import com.prupe.mcpatcher.mal.tile.TileLoader;
+import jss.notfine.config.MCPatcherForgeConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.*;
@@ -21,10 +20,10 @@ import java.util.*;
 
 @Environment(EnvType.CLIENT)
 public class CTMUtils {
-    private static final MCLogger logger = MCLogger.getLogger(MCPatcherUtils.CONNECTED_TEXTURES, "CTM");
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.CONNECTED_TEXTURES, "CTM");
 
-    private static final boolean enableStandard = Config.getBoolean(MCPatcherUtils.CONNECTED_TEXTURES, "standard", true);
-    private static final boolean enableNonStandard = Config.getBoolean(MCPatcherUtils.CONNECTED_TEXTURES, "nonStandard", true);
+    private static final boolean enableStandard = MCPatcherForgeConfig.instance().ctmStandard;
+    private static final boolean enableNonStandard = MCPatcherForgeConfig.instance().ctmNonStandard;
 
     private static final List<ITileOverride> allOverrides = new ArrayList<ITileOverride>();
     private static final Map<Block, List<BlockStateMatcher>> blockOverrides = new IdentityHashMap<Block, List<BlockStateMatcher>>();
@@ -117,7 +116,7 @@ public class CTMUtils {
         haveBlockFace = false;
     }
 
-    public static Icon getBlockIcon(Icon icon, RenderBlocks renderBlocks, Block block, IBlockAccess blockAccess, int i, int j, int k, int face) {
+    public static Icon getBlockIcon(Icon icon, Block block, IBlockAccess blockAccess, int i, int j, int k, int face) {
         lastOverride = null;
         if (blockAccess != null && checkFace(face)) {
             if (!haveBlockFace) {
@@ -133,7 +132,7 @@ public class CTMUtils {
         return lastOverride == null && skipDefaultRendering(block) ? RenderBlocksUtils.blankIcon : icon;
     }
 
-    public static Icon getBlockIcon(Icon icon, RenderBlocks renderBlocks, Block block, int face, int metadata) {
+    public static Icon getBlockIcon(Icon icon, Block block, int face, int metadata) {
         lastOverride = null;
         if (checkFace(face) && checkRenderType(block)) {
             renderBlockState.setBlockMetadata(block, metadata, face);
@@ -145,8 +144,8 @@ public class CTMUtils {
         return icon;
     }
 
-    public static Icon getBlockIcon(Icon icon, RenderBlocks renderBlocks, Block block, int face) {
-        return getBlockIcon(icon, renderBlocks, block, face, 0);
+    public static Icon getBlockIcon(Icon icon, Block block, int face) {
+        return getBlockIcon(icon, block, face, 0);
     }
 
     public static void reset() {

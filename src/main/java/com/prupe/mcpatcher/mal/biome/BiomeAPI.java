@@ -15,7 +15,7 @@ import java.util.BitSet;
 
 @Environment(EnvType.CLIENT)
 public class BiomeAPI {
-    private static final MCLogger logger = MCLogger.getLogger(MCPatcherUtils.CUSTOM_COLORS);
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.CUSTOM_COLORS);
 
     public static final int WORLD_MAX_HEIGHT = 255;
     public static final boolean isColorHeightDependent = false;

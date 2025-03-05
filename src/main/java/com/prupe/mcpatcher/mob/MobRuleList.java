@@ -14,7 +14,7 @@ import java.util.*;
 
 @Environment(EnvType.CLIENT)
 class MobRuleList {
-    private static final MCLogger logger = MCLogger.getLogger(MCPatcherUtils.RANDOM_MOBS);
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.RANDOM_MOBS);
 
     public static final String ALTERNATIVES_REGEX = "_(eyes|overlay|tame|angry|collar|fur|invulnerable|shooting)\\.properties$";
 

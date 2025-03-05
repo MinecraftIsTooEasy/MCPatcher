@@ -1,7 +1,6 @@
 // +++START EDIT+++
 package com.prupe.mcpatcher.cc;
 
-import com.prupe.mcpatcher.Config;
 import com.prupe.mcpatcher.MCLogger;
 import com.prupe.mcpatcher.MCPatcherUtils;
 import com.prupe.mcpatcher.mal.biome.*;
@@ -12,6 +11,7 @@ import com.prupe.mcpatcher.mal.resource.GLAPI;
 import com.prupe.mcpatcher.mal.resource.PropertiesFile;
 import com.prupe.mcpatcher.mal.resource.ResourceList;
 import com.prupe.mcpatcher.mal.resource.TexturePackAPI;
+import jss.notfine.config.MCPatcherForgeConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.Block;
@@ -23,16 +23,16 @@ import java.util.*;
 
 @Environment(EnvType.CLIENT)
 public class ColorizeBlock {
-    private static final MCLogger logger = MCLogger.getLogger(MCPatcherUtils.CUSTOM_COLORS);
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.CUSTOM_COLORS);
 
-    private static final boolean useWaterColors = Config.getBoolean(MCPatcherUtils.CUSTOM_COLORS, "water", true);
-    private static final boolean useTreeColors = Config.getBoolean(MCPatcherUtils.CUSTOM_COLORS, "tree", true);
-    private static final boolean useRedstoneColors = Config.getBoolean(MCPatcherUtils.CUSTOM_COLORS, "redstone", true);
-    private static final boolean useStemColors = Config.getBoolean(MCPatcherUtils.CUSTOM_COLORS, "stem", true);
-    private static final boolean useBlockColors = Config.getBoolean(MCPatcherUtils.CUSTOM_COLORS, "otherBlocks", true);
+    private static final boolean useWaterColors = MCPatcherForgeConfig.instance().ccWater;
+    private static final boolean useTreeColors = MCPatcherForgeConfig.instance().ccTree;
+    private static final boolean useRedstoneColors = MCPatcherForgeConfig.instance().ccRedstone;
+    private static final boolean useStemColors = MCPatcherForgeConfig.instance().ccStem;
+    private static final boolean useBlockColors = MCPatcherForgeConfig.instance().ccOtherBlocks;
 
-    static final boolean enableSmoothBiomes = Config.getBoolean(MCPatcherUtils.CUSTOM_COLORS, "smoothBiomes", true);
-    static final boolean enableTestColorSmoothing = Config.getBoolean(MCPatcherUtils.CUSTOM_COLORS, "testColorSmoothing", false);
+    static final boolean enableSmoothBiomes = MCPatcherForgeConfig.instance().smoothBiomes;
+    static final boolean enableTestColorSmoothing = MCPatcherForgeConfig.instance().testColorSmoothing;
 
     private static final ResourceLocation REDSTONE_COLORS = TexturePackAPI.newMCPatcherResourceLocation("/misc/redstonecolor.png");
     private static final ResourceLocation STEM_COLORS = TexturePackAPI.newMCPatcherResourceLocation("/misc/stemcolor.png");
@@ -55,7 +55,7 @@ public class ColorizeBlock {
     private static IColorMap waterColorMap;
     private static float[][] redstoneColor; // colormap/redstone.png
 
-    private static final int blockBlendRadius = Config.getInt(MCPatcherUtils.CUSTOM_COLORS, "blockBlendRadius2", 4);
+    private static final int blockBlendRadius = MCPatcherForgeConfig.instance().blockBlendRadius;
 
     public static int blockColor;
     public static boolean isSmooth;

@@ -1,11 +1,10 @@
-// +++START EDIT+++
 package com.prupe.mcpatcher.cc;
 
-import com.prupe.mcpatcher.Config;
 import com.prupe.mcpatcher.MCPatcherUtils;
 import com.prupe.mcpatcher.mal.biome.*;
 import com.prupe.mcpatcher.mal.resource.PropertiesFile;
 import com.prupe.mcpatcher.mal.resource.TexturePackAPI;
+import jss.notfine.config.MCPatcherForgeConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.*;
@@ -17,7 +16,7 @@ import static com.prupe.mcpatcher.cc.Colorizer.*;
 
 @Environment(EnvType.CLIENT)
 public class ColorizeWorld {
-    private static final int fogBlendRadius = Config.getInt(MCPatcherUtils.CUSTOM_COLORS, "fogBlendRadius", 7);
+    private static final int fogBlendRadius = MCPatcherForgeConfig.instance().fogBlendRadius;
 
     private static final ResourceLocation UNDERWATERCOLOR = TexturePackAPI.newMCPatcherResourceLocation("/misc/underwatercolor.png");
     private static final ResourceLocation UNDERLAVACOLOR = TexturePackAPI.newMCPatcherResourceLocation("/misc/underlavacolor.png");

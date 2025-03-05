@@ -1,11 +1,11 @@
 package com.prupe.mcpatcher.sky;
 
-import com.prupe.mcpatcher.Config;
 import com.prupe.mcpatcher.MCLogger;
 import com.prupe.mcpatcher.MCPatcherUtils;
 import com.prupe.mcpatcher.mal.resource.*;
 import com.prupe.mcpatcher.mal.tessellator.TessellatorAPI;
 
+import jss.notfine.config.MCPatcherForgeConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.Minecraft;
@@ -18,11 +18,11 @@ import java.util.*;
 
 @Environment(EnvType.CLIENT)
 public class SkyRenderer {
-    private static final MCLogger logger = MCLogger.getLogger(MCPatcherUtils.BETTER_SKIES);
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.BETTER_SKIES);
 
-    private static final boolean enable = Config.getBoolean(MCPatcherUtils.BETTER_SKIES, "skybox", true);
-    private static final boolean unloadTextures = Config.getBoolean(MCPatcherUtils.BETTER_SKIES, "unloadTextures", true);
-    public static final double horizonHeight = Config.getInt(MCPatcherUtils.BETTER_SKIES, "horizon", 16);
+    private static final boolean enable = MCPatcherForgeConfig.instance().skybox;
+    private static final boolean unloadTextures = MCPatcherForgeConfig.instance().unloadTextures;
+    public static final double horizonHeight = MCPatcherForgeConfig.instance().horizon;
 
     private static double worldTime;
     private static float celestialAngle;

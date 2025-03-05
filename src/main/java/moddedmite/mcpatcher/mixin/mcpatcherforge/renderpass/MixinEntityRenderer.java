@@ -1,5 +1,6 @@
 package moddedmite.mcpatcher.mixin.mcpatcherforge.renderpass;
 
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.Minecraft;
@@ -13,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.llamalad7.mixinextras.injector.WrapWithCondition;
 import com.prupe.mcpatcher.renderpass.RenderPass;
 
 @Mixin(EntityRenderer.class)
@@ -51,12 +51,13 @@ public abstract class MixinEntityRenderer {
         return returnValue;
     }
 
-    @Inject(
-        method = "renderWorld(FJ)V",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDepthMask(Z)V", ordinal = 3, remap = false))
-    private void modifyRenderWorld4(float partialTickTime, long p_78471_2_, CallbackInfo ci) {
-        this.mc.renderGlobal.sortAndRender(this.mc.renderViewEntity, 5, partialTickTime);
-        this.renderRainSnow(partialTickTime);
-    }
+    //TODO
+//    @Inject(
+//        method = "renderWorld(FJ)V",
+//        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDepthMask(Z)V", ordinal = 3, remap = false))
+//    private void modifyRenderWorld4(float partialTickTime, long p_78471_2_, CallbackInfo ci) {
+//        this.mc.renderGlobal.sortAndRender(this.mc.renderViewEntity, 5, partialTickTime);
+//        this.renderRainSnow(partialTickTime);
+//    }
 
 }

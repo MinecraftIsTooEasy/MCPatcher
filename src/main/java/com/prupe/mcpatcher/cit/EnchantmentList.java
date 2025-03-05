@@ -13,7 +13,7 @@ import java.util.*;
 
 @Environment(EnvType.CLIENT)
 final class EnchantmentList {
-    private static final MCLogger logger = MCLogger.getLogger(MCPatcherUtils.CUSTOM_ITEM_TEXTURES, "CIT");
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.CUSTOM_ITEM_TEXTURES, "CIT");
 
     private static final float PI = (float) Math.PI;
 

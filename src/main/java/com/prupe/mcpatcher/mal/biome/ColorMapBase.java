@@ -16,7 +16,7 @@ import java.util.logging.Level;
 
 @Environment(EnvType.CLIENT)
 abstract public class ColorMapBase {
-    private static final MCLogger logger = MCLogger.getLogger(MCPatcherUtils.CUSTOM_COLORS);
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.CUSTOM_COLORS);
 
     public static final int DEFAULT_HEIGHT = 64;
 

@@ -1,10 +1,9 @@
-// +++START EDIT+++
 package com.prupe.mcpatcher.ctm;
 
-import com.prupe.mcpatcher.Config;
 import com.prupe.mcpatcher.MCPatcherUtils;
 import com.prupe.mcpatcher.mal.block.BlockStateMatcher;
 import com.prupe.mcpatcher.mal.tile.IconAPI;
+import jss.notfine.config.MCPatcherForgeConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.Block;
@@ -14,7 +13,7 @@ import java.util.*;
 
 @Environment(EnvType.CLIENT)
 abstract public class TileOverrideIterator implements Iterator<ITileOverride> {
-    private static final int MAX_RECURSION = Config.getInt(MCPatcherUtils.CONNECTED_TEXTURES, "maxRecursion", 4);
+    private static final int MAX_RECURSION = MCPatcherForgeConfig.instance().maxRecursion;
 
     private final Map<Block, List<BlockStateMatcher>> allBlockOverrides;
     private final Map<String, List<ITileOverride>> allTileOverrides;

@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Environment(EnvType.CLIENT)
 abstract public class TexturePackChangeHandler implements Comparable<TexturePackChangeHandler> {
-    private static final MCLogger logger = MCLogger.getLogger("Texture Pack");
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.TEXTURE_PACK);
 
     private static final ArrayList<TexturePackChangeHandler> handlers = new ArrayList<TexturePackChangeHandler>();
     private static int recurseDepth;

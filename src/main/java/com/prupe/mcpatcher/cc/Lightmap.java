@@ -1,11 +1,10 @@
-// +++START EDIT+++
 package com.prupe.mcpatcher.cc;
 
-import com.prupe.mcpatcher.Config;
 import com.prupe.mcpatcher.MCLogger;
 import com.prupe.mcpatcher.MCPatcherUtils;
 import com.prupe.mcpatcher.mal.biome.ColorUtils;
 import com.prupe.mcpatcher.mal.resource.TexturePackAPI;
+import jss.notfine.config.MCPatcherForgeConfig;
 import mitemod.mcpatcher.EntityRendererMCP;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -19,7 +18,7 @@ import java.util.HashMap;
 
 @Environment(EnvType.CLIENT)
 public final class Lightmap {
-    private static final MCLogger logger = MCLogger.getLogger(MCPatcherUtils.CUSTOM_COLORS);
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.CUSTOM_COLORS);
 
     private static final String LIGHTMAP_FORMAT1 = "/environment/lightmap%d.png";
 
@@ -27,7 +26,7 @@ public final class Lightmap {
     private static final int HEIGHT_WITHOUT_NIGHTVISION = 2 * LIGHTMAP_SIZE;
     private static final int HEIGHT_WITH_NIGHTVISION = 4 * LIGHTMAP_SIZE;
 
-    private static final boolean useLightmaps = Config.getBoolean(MCPatcherUtils.CUSTOM_COLORS, "lightmaps", true);
+    private static final boolean useLightmaps = MCPatcherForgeConfig.instance().ccLightmaps;
 
     private static final HashMap<Integer, Lightmap> lightmaps = new HashMap<Integer, Lightmap>();
 

@@ -1,12 +1,12 @@
 package com.prupe.mcpatcher.sky;
 
-import com.prupe.mcpatcher.Config;
 import com.prupe.mcpatcher.MCLogger;
 import com.prupe.mcpatcher.MCPatcherUtils;
 import com.prupe.mcpatcher.mal.resource.BlendMethod;
 import com.prupe.mcpatcher.mal.resource.GLAPI;
 import com.prupe.mcpatcher.mal.resource.PropertiesFile;
 import com.prupe.mcpatcher.mal.resource.TexturePackAPI;
+import jss.notfine.config.MCPatcherForgeConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.EntityFX;
@@ -21,8 +21,8 @@ public class FireworksHelper {
     private static final int EXTRA_LAYER = LIT_LAYER + 1;
     private static final ResourceLocation PARTICLE_PROPERTIES = TexturePackAPI.newMCPatcherResourceLocation("particle.properties");
 
-    private static final MCLogger logger = MCLogger.getLogger(MCPatcherUtils.BETTER_SKIES);
-    private static final boolean enable = Config.getBoolean(MCPatcherUtils.BETTER_SKIES, "brightenFireworks", true);
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.BETTER_SKIES);
+    private static final boolean enable = MCPatcherForgeConfig.instance().brightenFireworks;
     private static BlendMethod blendMethod;
 
     public static int getFXLayer(EntityFX entity) {

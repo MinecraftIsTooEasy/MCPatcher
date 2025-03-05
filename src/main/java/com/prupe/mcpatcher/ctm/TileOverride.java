@@ -25,7 +25,7 @@ import static com.prupe.mcpatcher.ctm.RenderBlockState.*;
 
 @Environment(EnvType.CLIENT)
 abstract class TileOverride implements ITileOverride {
-    private static final MCLogger logger = MCLogger.getLogger(MCPatcherUtils.CONNECTED_TEXTURES, "CTM");
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.CONNECTED_TEXTURES, "CTM");
 
     private static final int META_MASK = 0xffff;
 

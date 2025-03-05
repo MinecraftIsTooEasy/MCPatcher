@@ -12,19 +12,19 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "moddedmite.mcpatcher.MCPatcher"
+      "moddedmite.mcpatcher.MITEPatcher"
     ]
   },
-  "custom": {
-    "loom:injected_interfaces": {
-    },
   "mixins": [
     "mcpatcher.mixins.json"
   ],
+  "custom": {
+    "loom:injected_interfaces": {
+    }
+  },
   "accessWidener": "mcpatcher.accesswidener",
     "depends": {
-      "mite": "~1.6.4",
+      "minecraft": "1.6.4-mite",
       "fishmodloader": ">=3.0.0"
-    }
   }
 }

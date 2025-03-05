@@ -540,14 +540,13 @@ public abstract class MixinRenderBlocks {
             ordinal = 0))
     private Icon redirectGrassSideOverLay1(Block block, int x, int y, int z, float red, float green, float blue) {
         return CTMUtils.getBlockIcon(
-            BlockGrass.getIconSideOverlay(),
-            (RenderBlocks) (Object) this,
-            block,
-            this.blockAccess,
-            x,
-            y,
-            z,
-            2);
+                BlockGrass.getIconSideOverlay(),
+                block,
+                blockAccess,
+                x,
+                y,
+                z,
+                2);
     }
 
     @Redirect(
@@ -560,14 +559,13 @@ public abstract class MixinRenderBlocks {
             ordinal = 1))
     private Icon redirectGrassSideOverLay2(Block block, int x, int y, int z, float red, float green, float blue) {
         return CTMUtils.getBlockIcon(
-            BlockGrass.getIconSideOverlay(),
-            (RenderBlocks) (Object) this,
-            block,
-            this.blockAccess,
-            x,
-            y,
-            z,
-            3);
+                BlockGrass.getIconSideOverlay(),
+                block,
+                blockAccess,
+                x,
+                y,
+                z,
+                3);
     }
 
     @Redirect(
@@ -580,14 +578,13 @@ public abstract class MixinRenderBlocks {
             ordinal = 2))
     private Icon redirectGrassSideOverLay3(Block block, int x, int y, int z, float red, float green, float blue) {
         return CTMUtils.getBlockIcon(
-            BlockGrass.getIconSideOverlay(),
-            (RenderBlocks) (Object) this,
-            block,
-            this.blockAccess,
-            x,
-            y,
-            z,
-            4);
+                BlockGrass.getIconSideOverlay(),
+                block,
+                blockAccess,
+                x,
+                y,
+                z,
+                4);
     }
 
     @Redirect(
@@ -600,14 +597,13 @@ public abstract class MixinRenderBlocks {
             ordinal = 3))
     private Icon redirectGrassSideOverLay4(Block block, int x, int y, int z, float red, float green, float blue) {
         return CTMUtils.getBlockIcon(
-            BlockGrass.getIconSideOverlay(),
-            (RenderBlocks) (Object) this,
-            block,
-            this.blockAccess,
-            x,
-            y,
-            z,
-            5);
+                BlockGrass.getIconSideOverlay(),
+                block,
+                blockAccess,
+                x,
+                y,
+                z,
+                5);
     }
 
     @Redirect(
@@ -655,17 +651,32 @@ public abstract class MixinRenderBlocks {
 
     @Overwrite
     public Icon getBlockIcon(Block par1Block, IBlockAccess par2IBlockAccess, int par3, int par4, int par5, int par6) {
-        return CTMUtils.getBlockIcon(this.getIconSafe(par1Block.getBlockTexture(par2IBlockAccess, par3, par4, par5, par6)), ReflectHelper.dyCast(this), par1Block, par2IBlockAccess, par3, par4, par5, par6);
+        return CTMUtils.getBlockIcon(
+                this.getIconSafe(par1Block.getIcon(par6, par2IBlockAccess.getBlockMetadata(par3, par4, par5))),
+                par1Block,
+                par2IBlockAccess,
+                par3,
+                par4,
+                par5,
+                par6);
+
     }
 
     @Overwrite
     public Icon getBlockIconFromSideAndMetadata(Block par1Block, int par2, int par3) {
-        return CTMUtils.getBlockIcon(this.getIconSafe(par1Block.getIcon(par2, par3)), ReflectHelper.dyCast(this), par1Block, par2, par3);
+        return CTMUtils.getBlockIcon(
+                this.getIconSafe(par1Block.getIcon(par2, par3)),
+                par1Block,
+                par2,
+                par3);
     }
 
     @Overwrite
     public Icon getBlockIconFromSide(Block par1Block, int par2) {
-        return CTMUtils.getBlockIcon(this.getIconSafe(par1Block.getBlockTextureFromSide(par2)), ReflectHelper.dyCast(this), par1Block, par2);
+        return CTMUtils.getBlockIcon(
+                this.getIconSafe(par1Block.getBlockTextureFromSide(par2)),
+                ReflectHelper.dyCast(this),
+                par2);
     }
 
     @Redirect(

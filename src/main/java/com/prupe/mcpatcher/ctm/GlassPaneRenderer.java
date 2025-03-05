@@ -1,10 +1,8 @@
-// +++START EDIT+++
 package com.prupe.mcpatcher.ctm;
 
-import com.prupe.mcpatcher.Config;
-import com.prupe.mcpatcher.MCPatcherUtils;
 import com.prupe.mcpatcher.mal.block.BlockAPI;
 import com.prupe.mcpatcher.mal.tessellator.TessellatorAPI;
+import jss.notfine.config.MCPatcherForgeConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.*;
@@ -13,7 +11,7 @@ import java.util.Arrays;
 
 @Environment(EnvType.CLIENT)
 public class GlassPaneRenderer {
-    private static final boolean enable = Config.getBoolean(MCPatcherUtils.CONNECTED_TEXTURES, "glassPane", true);
+    private static final boolean enable = MCPatcherForgeConfig.instance().ctmGlassPane;
 
     public static boolean skipPaneRendering;
     public static boolean skipTopEdgeRendering;
@@ -52,7 +50,7 @@ public class GlassPaneRenderer {
             return false;
         }
         for (int face = BlockOrientation.NORTH_FACE; face <= BlockOrientation.EAST_FACE; face++) {
-            icons[face] = CTMUtils.getBlockIcon(origIcon, renderBlocks, blockPane, renderBlocks.blockAccess, i, j, k, face);
+            icons[face] = CTMUtils.getBlockIcon(origIcon, blockPane, renderBlocks.blockAccess, i, j, k, face);
             if (icons[face] == null) {
                 skipPaneRendering = false;
                 return false;

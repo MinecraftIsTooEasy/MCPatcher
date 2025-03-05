@@ -17,7 +17,7 @@ import java.util.LinkedHashMap;
 
 @Environment(EnvType.CLIENT)
 public class MobRandomizer {
-    private static final MCLogger logger = MCLogger.getLogger(MCPatcherUtils.RANDOM_MOBS);
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.RANDOM_MOBS);
     private static final LinkedHashMap<String, ResourceLocation> cache = new LinkedHashMap<String, ResourceLocation>();
 
     static {

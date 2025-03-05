@@ -1,4 +1,3 @@
-// +++START EDIT+++
 package com.prupe.mcpatcher.cit;
 
 import com.prupe.mcpatcher.MCLogger;
@@ -19,7 +18,7 @@ import java.util.*;
 
 @Environment(EnvType.CLIENT)
 abstract class OverrideBase implements Comparable<OverrideBase> {
-    static final MCLogger logger = MCLogger.getLogger(MCPatcherUtils.CUSTOM_ITEM_TEXTURES, "CIT");
+    static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.CUSTOM_ITEM_TEXTURES, "CIT");
 
     private static final int MAX_DAMAGE = 65535;
     private static final int MAX_STACK_SIZE = 65535;

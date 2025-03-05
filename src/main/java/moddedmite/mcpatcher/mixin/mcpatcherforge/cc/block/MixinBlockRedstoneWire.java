@@ -28,26 +28,27 @@ public abstract class MixinBlockRedstoneWire {
         return ColorizeBlock.colorizeRedstoneWire(worldIn, x, y, z, defaultColor);
     }
 
-    @ModifyArgs(
-        method = "randomDisplayTick(Lnet/minecraft/World;IIILjava/util/Random;)V",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/World;spawnParticle(Lnet/minecraft/EnumParticle;DDDDDD)V"))
-    private void modifyRandomDisplayTick(Args args, World worldIn, int x, int y, int z, Random random) {
-        if (ColorizeBlock.computeRedstoneWireColor(worldIn.getBlockMetadata(x, y, z))) {
-            float f1 = Colorizer.setColor[0];
-            float f2 = Colorizer.setColor[1];
-            float f3 = Colorizer.setColor[2];
-
-            if (f2 < 0.0f) {
-                f2 = 0.0f;
-            }
-
-            if (f3 < 0.0f) {
-                f3 = 0.0f;
-            }
-
-            args.set(4, (double) f1);
-            args.set(5, (double) f2);
-            args.set(6, (double) f3);
-        }
-    }
+    //TODO class not found Args
+//    @ModifyArgs(
+//        method = "randomDisplayTick(Lnet/minecraft/World;IIILjava/util/Random;)V",
+//        at = @At(value = "INVOKE", target = "Lnet/minecraft/World;spawnParticle(Lnet/minecraft/EnumParticle;DDDDDD)V"))
+//    private void modifyRandomDisplayTick(Args args, World worldIn, int x, int y, int z, Random random) {
+//        if (ColorizeBlock.computeRedstoneWireColor(worldIn.getBlockMetadata(x, y, z))) {
+//            float f1 = Colorizer.setColor[0];
+//            float f2 = Colorizer.setColor[1];
+//            float f3 = Colorizer.setColor[2];
+//
+//            if (f2 < 0.0f) {
+//                f2 = 0.0f;
+//            }
+//
+//            if (f3 < 0.0f) {
+//                f3 = 0.0f;
+//            }
+//
+//            args.set(4, (double) f1);
+//            args.set(5, (double) f2);
+//            args.set(6, (double) f3);
+//        }
+//    }
 }

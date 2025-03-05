@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 @Environment(EnvType.CLIENT)
 public class TexturePackAPI {
-    private static final MCLogger logger = MCLogger.getLogger("Texture Pack");
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.TEXTURE_PACK);
 
     public static final String DEFAULT_NAMESPACE = "minecraft";
 
@@ -60,26 +60,48 @@ public class TexturePackAPI {
         ResourcePack texturePack = instance.getTexturePack();
         return texturePack == null || texturePack instanceof TexturePackDefault;
     }
-    
+
+//    public static InputStream getInputStream(ResourceLocation resource) {
+//        try {
+//            if (resource instanceof ResourceLocationWithSource resourceLocationWithSource) {
+//                try {
+//                    return resourceLocationWithSource.getSource()
+//                            .getInputStream(resource);
+//                } catch (Exception ignore) {}
+//            }
+//            return resource == null ? null
+//                    : Minecraft.getMinecraft()
+//                    .getResourceManager()
+//                    .getResource(resource)
+//                    .getInputStream();
+//        } catch (Exception ignore) {
+//            return null;
+//        }
+//    }
+
     public static InputStream getInputStream(ResourceLocation resource) {
-    	if (resource == null) {
-    		return null;
-    	}
-    	
-    	ResourcePack resourcePack;
-    	
-        if (resource instanceof ResourceLocationWithSource) {
-            resourcePack = ((ResourceLocationWithSource) resource).getSource();
-        }
-        else {
-        	resourcePack = instance.getTexturePack();
+        if (resource == null) {
+            return null;
         }
 
+        ResourcePack resourcePack;
+
+        if (resource instanceof ResourceLocationWithSource) {
+            resourcePack = ((ResourceLocationWithSource) resource).getSource();
+        } else {
+            resourcePack = instance.getTexturePack();
+        }
+
+//        return null;
         return resourcePack == null ? null : resourcePack.getInputStream(resource);
     }
 
     public static boolean hasResource(ResourceLocation resource) {
         if (resource == null) {
+            return false;
+        } else if (resource.getResourcePath().startsWith("font/")) {
+            return false;
+        } else if (resource.getResourcePath().startsWith("misc/")) {
             return false;
         } else if (resource.getResourcePath().endsWith(".png")) {
             return getImage(resource) != null;

@@ -1,20 +1,23 @@
 package com.prupe.mcpatcher;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-
 import java.util.HashMap;
-import java.util.logging.*;
+import java.util.Map;
+import java.util.logging.Formatter;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
-@Environment(EnvType.CLIENT)
+import jss.notfine.config.MCPatcherForgeConfig;
+
 public class MCLogger {
-    private static final HashMap<String, MCLogger> allLoggers = new HashMap<String, MCLogger>();
+
+    private static final Map<String, MCLogger> allLoggers = new HashMap<>();
 
     public static final Level ERROR = new ErrorLevel();
 
     private static final long FLOOD_INTERVAL = 1000L;
     private static final long FLOOD_REPORT_INTERVAL = 5000L;
-    private static final int FLOOD_LIMIT = Config.getInstance().floodMessageLimit;
     private static final int FLOOD_LEVEL = Level.INFO.intValue();
 
     private final String logPrefix;
@@ -24,28 +27,39 @@ public class MCLogger {
     private long lastFloodReport;
     private int floodCount;
     private long lastMessage = System.currentTimeMillis();
-    private long lastLogEvery = lastMessage;
 
-    public static MCLogger getLogger(String category) {
-        return getLogger(category, category);
+    public static MCLogger getLogger(Category category) {
+        return getLogger(category, category.name);
     }
 
-    public static synchronized MCLogger getLogger(String category, String logPrefix) {
-        MCLogger logger = allLoggers.get(category);
+    public static synchronized MCLogger getLogger(Category category, String logPrefix) {
+        MCLogger logger = allLoggers.get(category.name);
         if (logger == null) {
             logger = new MCLogger(category, logPrefix);
-            allLoggers.put(category, logger);
+            allLoggers.put(category.name, logger);
         }
         return logger;
     }
 
-    private MCLogger(String category, String logPrefix) {
+    private MCLogger(Category category, String logPrefix) {
         this.logPrefix = logPrefix;
-        logger = Logger.getLogger(category);
-        logger.setLevel(Config.getLogLevel(category));
+        logger = Logger.getLogger(category.name);
+        MCPatcherForgeConfig config = MCPatcherForgeConfig.instance();
+        logger.setLevel(Level.parse(switch (category) {
+            case CUSTOM_COLORS -> config.customColorsLoggingLevel;
+            case CUSTOM_ITEM_TEXTURES -> config.customItemTexturesLoggingLevel;
+            case CONNECTED_TEXTURES -> config.connectedTexturesLoggingLevel;
+            case EXTENDED_HD -> config.extendedHDLoggingLevel;
+            case RANDOM_MOBS -> config.randomMobsLoggingLevel;
+            case BETTER_SKIES -> config.betterSkiesLoggingLevel;
+            default -> Level.INFO.getName();
+        }));
+
         logger.setUseParentHandlers(false);
         logger.addHandler(new Handler() {
+
             private final Formatter formatter = new Formatter() {
+
                 @Override
                 public String format(LogRecord record) {
                     Level level = record.getLevel();
@@ -58,7 +72,7 @@ public class MCLogger {
                             prefix.append("\n");
                             message = message.substring(1);
                         }
-                        return prefix.toString() + "[" + MCLogger.this.logPrefix + "] " + level.toString() + ": " + message;
+                        return prefix + "[" + MCLogger.this.logPrefix + "] " + level.toString() + ": " + message;
                     }
                 }
             };
@@ -69,12 +83,10 @@ public class MCLogger {
             }
 
             @Override
-            public void flush() {
-            }
+            public void flush() {}
 
             @Override
-            public void close() throws SecurityException {
-            }
+            public void close() throws SecurityException {}
         });
     }
 
@@ -96,11 +108,6 @@ public class MCLogger {
         floodCount++;
         if (flooding) {
             return showFloodMessage;
-        } else if (floodCount > FLOOD_LIMIT) {
-            flooding = true;
-            lastFloodReport = now;
-            reportFlooding(now);
-            return false;
         } else {
             return true;
         }
@@ -108,9 +115,10 @@ public class MCLogger {
 
     private void reportFlooding(long now) {
         if (floodCount > 0) {
-            logger.log(Level.WARNING, String.format(
-                "%d flood messages dropped in the last %ds", floodCount, (now - lastFloodReport) / 1000L
-            ));
+            logger.log(
+                Level.WARNING,
+                String
+                    .format("%d flood messages dropped in the last %ds", floodCount, (now - lastFloodReport) / 1000L));
         }
         floodCount = 0;
         lastFloodReport = now;
@@ -118,10 +126,6 @@ public class MCLogger {
 
     public boolean isLoggable(Level level) {
         return logger.isLoggable(level);
-    }
-
-    public void setLevel(Level level) {
-        logger.setLevel(level);
     }
 
     public void log(Level level, String format, Object... params) {
@@ -165,21 +169,31 @@ public class MCLogger {
         log(Level.FINEST, format, params);
     }
 
-    public boolean logEvery(long milliseconds) {
-        long now = System.currentTimeMillis();
-        if (now - lastLogEvery > milliseconds) {
-            lastLogEvery = now;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Environment(EnvType.CLIENT)
     private static class ErrorLevel extends Level {
+
         protected ErrorLevel() {
             super("ERROR", (Level.WARNING.intValue() + Level.SEVERE.intValue()) / 2);
         }
     }
+
+    public enum Category {
+
+        CUSTOM_COLORS(MCPatcherUtils.CUSTOM_COLORS),
+        CUSTOM_ITEM_TEXTURES(MCPatcherUtils.CUSTOM_ITEM_TEXTURES),
+        CONNECTED_TEXTURES(MCPatcherUtils.CONNECTED_TEXTURES),
+        EXTENDED_HD(MCPatcherUtils.EXTENDED_HD),
+        RANDOM_MOBS(MCPatcherUtils.RANDOM_MOBS),
+        BETTER_SKIES(MCPatcherUtils.BETTER_SKIES),
+        TEXTURE_PACK("Texture Pack"),
+        TILESHEET("Tilesheet"),
+        BETTER_GLASS(MCPatcherUtils.BETTER_GLASS),
+
+        ;
+
+        public final String name;
+
+        Category(String name) {
+            this.name = name;
+        }
+    }
 }
-// ---END EDIT---

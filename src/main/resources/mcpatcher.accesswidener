@@ -20,6 +20,8 @@ accessible method net/minecraft/EntityRenderer getNightVisionBrightness (Lnet/mi
 accessible field net/minecraft/TextureClock field_94239_h D
 accessible method net/minecraft/FileResourcePack getResourcePackZipFile ()Ljava/util/zip/ZipFile;
 accessible field net/minecraft/Minecraft renderEngine Lnet/minecraft/TextureManager;
+accessible field net/minecraft/FallbackResourceManager resourcePacks Ljava/util/List;
+accessible field net/minecraft/SimpleReloadableResourceManager domainResourceManagers Ljava/util/Map;
 
 extendable class net/minecraft/EntityRenderer
 extendable class net/minecraft/ResourceLocation

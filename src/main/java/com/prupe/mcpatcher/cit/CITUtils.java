@@ -1,7 +1,5 @@
-// +++START EDIT+++
 package com.prupe.mcpatcher.cit;
 
-import com.prupe.mcpatcher.Config;
 import com.prupe.mcpatcher.MCLogger;
 import com.prupe.mcpatcher.MCPatcherUtils;
 import com.prupe.mcpatcher.mal.item.ItemAPI;
@@ -12,6 +10,7 @@ import com.prupe.mcpatcher.mal.resource.TexturePackChangeHandler;
 import com.prupe.mcpatcher.mal.tessellator.TessellatorAPI;
 import com.prupe.mcpatcher.mal.tile.IconAPI;
 import com.prupe.mcpatcher.mal.tile.TileLoader;
+import jss.notfine.config.MCPatcherForgeConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.*;
@@ -22,7 +21,7 @@ import java.util.*;
 
 @Environment(EnvType.CLIENT)
 public class CITUtils {
-    private static final MCLogger logger = MCLogger.getLogger(MCPatcherUtils.CUSTOM_ITEM_TEXTURES, "CIT");
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.CUSTOM_ITEM_TEXTURES, "CIT");
 
     static final String CIT_PROPERTIES = "cit.properties";
     private static final ResourceLocation CIT_PROPERTIES1 = TexturePackAPI.newMCPatcherResourceLocation(CIT_PROPERTIES);
@@ -35,9 +34,9 @@ public class CITUtils {
     static Item itemCompass;
     static Item itemClock;
 
-    static final boolean enableItems = Config.getBoolean(MCPatcherUtils.CUSTOM_ITEM_TEXTURES, "items", true);
-    static final boolean enableEnchantments = Config.getBoolean(MCPatcherUtils.CUSTOM_ITEM_TEXTURES, "enchantments", true);
-    static final boolean enableArmor = Config.getBoolean(MCPatcherUtils.CUSTOM_ITEM_TEXTURES, "armor", true);
+    static final boolean enableItems = MCPatcherForgeConfig.instance().citItems;
+    static final boolean enableEnchantments = MCPatcherForgeConfig.instance().citEnchantments;
+    static final boolean enableArmor = MCPatcherForgeConfig.instance().citArmor;
 
     private static TileLoader tileLoader;
     private static final Map<Item, List<ItemOverride>> items = new IdentityHashMap<Item, List<ItemOverride>>();

@@ -2,12 +2,12 @@ package com.prupe.mcpatcher.mal.resource;
 
 import com.prupe.mcpatcher.MCLogger;
 import com.prupe.mcpatcher.MCPatcherUtils;
+import moddedmite.mcpatcher.MITEPatcher;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.*;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.zip.ZipEntry;
@@ -15,7 +15,7 @@ import java.util.zip.ZipFile;
 
 @Environment(EnvType.CLIENT)
 public class ResourceList {
-    private static final MCLogger logger = MCLogger.getLogger("Texture Pack");
+    private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.TEXTURE_PACK);
 
     private static ResourceList instance;
     private static final Map<ResourcePack, Integer> resourcePackOrder = new WeakHashMap<ResourcePack, Integer>();
@@ -78,7 +78,7 @@ public class ResourceList {
 
     private ResourceList(DefaultResourcePack resourcePack) {
         this.resourcePack = resourcePack;
-        String version = MCPatcherUtils.getMinecraftVersion();
+        String version = MITEPatcher.MCVersion;
         File jar = MCPatcherUtils.getMinecraftPath("versions", version, version + ".jar");
         if (jar.isFile()) {
             ZipFile zipFile = null;
